@@ -1,5 +1,18 @@
-a = 123
+class Father
+  attr_accessor :name, :age
 
-l = ->  { puts a}
+  def initialize(name, age)
+    @name = name
+    @age = age
+  end
 
-l.call
+end
+
+class Son < Father
+end
+
+
+son = Son.new('jack', 23)
+
+
+puts son.name

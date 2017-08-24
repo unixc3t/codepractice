@@ -1,5 +1,5 @@
 class MainController < BaseController
   def index
-    render(template(:home))
+    render(:home)
   end
 end

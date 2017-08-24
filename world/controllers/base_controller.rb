@@ -1,10 +1,5 @@
 class BaseController
-
-  TEMPLATES = {
-    home: ERB.new(File.read('./world/view/home.html.erb')),
-    countries: ERB.new(File.read('./world/view/countries.html.erb')),
-    regions: ERB.new(File.read('./world/view/regions.html.erb'))
-  }.freeze
+  TEMPLATES_ROOT = './world/view'.freeze
 
   attr_reader :request, :response
 
@@ -16,11 +11,20 @@ class BaseController
 
   protected
 
-  def render(result)
-    response.body = result
+  def render(template_name)
+    response.body = template(template_name.to_s)
   end
 
+
+  def params
+    @request.query
+  end
+
+  private
+
   def template(key)
-    TEMPLATES[key].result(binding)
+    file_path = "#{TEMPLATES_ROOT}/#{key}.html.erb"
+    erb = ERB.new(File.read(file_path))
+    erb.result(binding)
   end
 end

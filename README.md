@@ -1,1 +1,1 @@
-# codepractice
+# 手动构建web应用
