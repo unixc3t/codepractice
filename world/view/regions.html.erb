@@ -1,0 +1,20 @@
+<html>
+
+<h2>Regions of <%= country.title %> </h2>
+<ul>
+  <li><a href="/">Main Page</a></li>
+  <li><a href="/countries">Countries</a></li>
+</ul>
+<table>
+  <tr>
+    <th>regions_id</th>
+    <th>title</th>
+  </tr>
+  <% regions.each do |region| %>
+      <tr>
+        <td><%= region.region_id %></td>
+        <td><%= region.title %></td>
+      </tr>
+  <% end %>
+</table>
+</html>
