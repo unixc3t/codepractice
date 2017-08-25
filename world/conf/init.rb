@@ -1,11 +1,36 @@
 require 'webrick'
 require 'erb'
-require_relative '../lib/vk'
-require_relative '../models/country'
-require_relative '../models/region'
-require_relative '../models/city'
+require 'yaml'
+require_relative './application'
 require_relative './routing'
-require_relative '../controllers/base_controller'
-require_relative '../controllers/main_controller'
-require_relative '../controllers/countries_controller'
-require_relative '../controllers/regions_controller'
+#require_relative '../../world/app/controllers/application_controller'
+
+
+skip_dir_names = %w(. ..)
+app_path = File.expand_path('../../app', __FILE__)
+
+
+load_path = %W(#{app_path}/controllers #{app_path}/models)
+
+load_path.each do |path|
+
+  loadarry = []
+  Dir.foreach(path) do |file_name|
+    next if skip_dir_names.include?(file_name)
+    loadarry << file_name
+  end
+
+  unless loadarry.size == 0
+    # 得到文件数组父类在子类后面,先加载的子类找找不到父类，所以报错，这里暂时排序一下，先加载父类
+    loadarry.sort! { |x, y| x[0] <=> y[0] }
+    require File.join(path, loadarry[0])
+    loadarry.delete_at(0)
+  end
+
+
+  loadarry.each do |file_name_rb|
+    require File.join(path, file_name_rb)
+  end
+end
+
+

@@ -8,7 +8,9 @@ class Routing
         controller_class = Object.const_get("#{class_prefix}Controller")
 
         server.mount_proc path do |req, res|
-          res.body = controller_class.new(req, res).send(handler_split_data[1])
+          res.body = controller_class.new(req, res,
+                                          handler_split_data[0],
+                                          handler_split_data[1]).send(handler_split_data[1])
         end
       end
     end

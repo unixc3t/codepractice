@@ -1,18 +1,9 @@
-class Father
-  attr_accessor :name, :age
 
-  def initialize(name, age)
-    @name = name
-    @age = age
-  end
+a=%w(guests_controller.rb application_controller.rb)
+
+a.sort! do |x , y|
+  x[0] <=> y[0]
 
 end
 
-class Son < Father
-end
-
-
-son = Son.new('jack', 23)
-
-
-puts son.name
+puts a

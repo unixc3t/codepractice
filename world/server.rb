@@ -1,11 +1,11 @@
 require_relative './conf/init'
 
-server = WEBrick::HTTPServer.new Port: 8000
+
+
+server = WEBrick::HTTPServer.new(Port: SERVER_CONFIG['port'])
 
 Routing.route({
-                root: 'main#index',
-                countries: 'countries#index',
-                regions: 'regions#index'
+                guests: 'guests#index'
               }, server)
 
 server.start
