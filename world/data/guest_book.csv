@@ -1,0 +1,4 @@
+email,nick,text,created_at,ip
+jim@example.com,Jim,Hello!,1503755526,127.0.0.1
+bob@example.com,bob,Hello! jim,1503755527,127.0.0.1
+jak@example.com,jak,Hello! bob,1503755528,127.0.0.1

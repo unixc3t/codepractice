@@ -1,9 +1,9 @@
-
-a=%w(guests_controller.rb application_controller.rb)
-
-a.sort! do |x , y|
-  x[0] <=> y[0]
-
+def sum(a,b=5,c=2)
+  puts a
+  puts b
+  puts c
+  puts a+b+c
 end
 
-puts a
+
+sum(b=1,c=1)

@@ -1,6 +1,6 @@
 class GuestsController < ApplicationController
   def index
-    render
+    render action: :create, controller: :guests
   end
 
   def create

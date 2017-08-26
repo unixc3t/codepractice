@@ -17,7 +17,7 @@ class ApplicationController
 
   protected
 
-  def render(template_name = nil, action = nil, controller = nil)
+  def render(template_name: nil, action: nil, controller: nil)
     folder = controller || controller_name
     file = template_name || action || action_name
     response.body = template(folder, file)

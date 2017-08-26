@@ -1,9 +1,9 @@
 require 'webrick'
 require 'erb'
 require 'yaml'
+require 'csv'
 require_relative './application'
 require_relative './routing'
-#require_relative '../../world/app/controllers/application_controller'
 
 
 skip_dir_names = %w(. ..)
@@ -20,7 +20,7 @@ load_path.each do |path|
     loadarry << file_name
   end
 
-  unless loadarry.size == 0
+  unless loadarry.size.zero?
     # 得到文件数组父类在子类后面,先加载的子类找找不到父类，所以报错，这里暂时排序一下，先加载父类
     loadarry.sort! { |x, y| x[0] <=> y[0] }
     require File.join(path, loadarry[0])
