@@ -2,6 +2,7 @@ require 'webrick'
 require 'erb'
 require 'yaml'
 require 'csv'
+require 'active_support/all'
 require_relative './application'
 require_relative './routing'
 

@@ -17,6 +17,11 @@ class ApplicationController
 
   protected
 
+  def redirect_to(path)
+    response['Location'] = '/'
+    response.status = '301'
+  end
+
   def render(template_name: nil, action: nil, controller: nil)
     folder = controller || controller_name
     file = template_name || action || action_name

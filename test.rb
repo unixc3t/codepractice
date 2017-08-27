@@ -1,9 +1,8 @@
-def sum(a,b=5,c=2)
-  puts a
-  puts b
-  puts c
-  puts a+b+c
+def hel(**options)
+  options.each do |meth,val|
+    puts meth
+    puts val
+  end
 end
 
-
-sum(b=1,c=1)
+ hel({hello=>'jack'})
