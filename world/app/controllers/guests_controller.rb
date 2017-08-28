@@ -11,6 +11,10 @@ class GuestsController < ApplicationController
   end
 
 
+  def api
+    render
+  end
+
   private
 
   def create_params

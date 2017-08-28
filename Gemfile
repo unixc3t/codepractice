@@ -3,3 +3,4 @@ source 'https://rubygems.org'
 
 gem 'activesupport', '~> 5.1'
 gem 'sinatra'
+gem 'mysql2'

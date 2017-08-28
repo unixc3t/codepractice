@@ -1,3 +1,4 @@
+require 'mysql2'
 require 'erb'
 require 'yaml'
 require 'csv'
@@ -8,9 +9,10 @@ require_relative './routing'
 
 skip_dir_names = %w(. ..)
 app_path = File.expand_path('../../app', __FILE__)
+db_path = File.expand_path('../../db', __FILE__)
 
 
-load_path = %W(#{app_path}/controllers #{app_path}/models)
+load_path = %W(#{app_path}/controllers #{app_path}/models #{db_path})
 
 load_path.each do |path|
 
