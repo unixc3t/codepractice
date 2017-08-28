@@ -1,13 +1,10 @@
 require_relative './conf/init'
+require 'sinatra'
 
-
-
-server = WEBrick::HTTPServer.new(Port: SERVER_CONFIG['port'])
 
 Routing.route({
-                root: 'guests#index',
-                guests: 'guests#index',
-                create_message: 'guests#create'
-              }, server)
+                'guests#index' => { path: ['/', '/guests'], methods: [:get] },
+                'guests#create' => { path: '/guests', methods: [:post] }
+              }, binding)
 
-server.start
+

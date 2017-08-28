@@ -1,4 +1,3 @@
-require 'webrick'
 require 'erb'
 require 'yaml'
 require 'csv'

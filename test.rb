@@ -1,8 +1,2 @@
-def hel(**options)
-  options.each do |meth,val|
-    puts meth
-    puts val
-  end
-end
+ [[1,2],32,12,11,434].flatten.each_slice(2) {|args| p args}
 
- hel({hello=>'jack'})

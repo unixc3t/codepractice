@@ -2,14 +2,16 @@ class ApplicationController
   TEMPLATES_ROOT = File.expand_path('../view', File.dirname(__FILE__)).freeze
 
   attr_reader :request, :response,
-              :controller_name, :action_name
+              :controller_name, :action_name, :params
 
   def initialize(request,
                  response,
+                 params,
                  controller_name,
                  action_name)
     @request = request
     @response = response
+    @params = params
     @controller_name = controller_name
     @action_name = action_name
   end
@@ -28,10 +30,6 @@ class ApplicationController
     response.body = template(folder, file)
   end
 
-
-  def params
-    @request.query
-  end
 
   private
 
