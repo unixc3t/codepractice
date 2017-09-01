@@ -3,6 +3,7 @@ require 'erb'
 require 'yaml'
 require 'csv'
 require 'active_support/all'
+require 'require_all'
 require_relative './application'
 require_relative './routing'
 
@@ -11,8 +12,13 @@ skip_dir_names = %w(. ..)
 app_path = File.expand_path('../../app', __FILE__)
 db_path = File.expand_path('../../db', __FILE__)
 
+require_all "#{app_path}/models"
+require_all "#{app_path}/controllers"
+require_all db_path
 
-load_path = %W(#{app_path}/controllers #{app_path}/models #{db_path})
+
+=begin
+#load_path = %W(#{app_path}/controllers #{app_path}/models #{db_path})
 
 load_path.each do |path|
 
@@ -34,5 +40,6 @@ load_path.each do |path|
     require File.join(path, file_name_rb)
   end
 end
+=end
 
 

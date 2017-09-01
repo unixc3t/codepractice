@@ -23,6 +23,7 @@
     <th>Text</th>
     <th>Created_at</th>
     <th>ip</th>
+    <th>delete</th>
   </tr>
   </thead>
   <tbody>
@@ -32,6 +33,9 @@
         <td><%= guest.text %></td>
         <td><%= guest.created_human_at %></td>
         <td><%= guest.ip %></td>
+        <td>
+          <a  class = "btn btn-warning"href="/guests/<%=guest.id%>/delete">Delete</a>
+        </td>
       </tr>
   <% end %>
   </tbody>
