@@ -1,6 +1,6 @@
 class GuestsController < ApplicationController
   def index
-    @guest_books = GuestBook.all
+    @guest_books = GuestBook.where(nick: params[:nick])
     render
   end
 

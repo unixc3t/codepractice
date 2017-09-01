@@ -1,28 +1,4 @@
 require 'active_support/all'
-class A
-  class << self
-    def hello
-      p 'GuestBook'.underscore.pluralize
-    end
-  end
-
-  def world
-    hello
-  end
-end
-
-class B < A
-  define_method :dd do
-    puts 'dddddd' if :dd == :dd
-  end
-end
-
-a = [:abc,:bcd,:created_at].map do |x|
-   x == :created_at ? nil: x
-end
+a = { nick: 'dfd', ip: '123' }.select{|k,v| v.present?}.to_a.map {|x| "#{x[0]} = '#{x[1]}'"}
 p a
-p ["''", "''", "'df'", "''", nil]
-    .join(", ")
-
-
-
+p a.join(" and ")

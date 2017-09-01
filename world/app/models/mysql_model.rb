@@ -3,15 +3,12 @@ class MysqlModel
     File.read(File.expand_path('../../conf/database.yml', File.dirname(__FILE__)))
   ).freeze
   class << self
-
     def attribute_accessible(*args)
       attr_accessor *args
       @available_attrs = args
     end
 
-    def available_attrs
-      @available_attrs
-    end
+    attr_reader :available_attrs
 
     def client
       @@client ||= Mysql2::Client.new(CONFIG)
@@ -23,8 +20,20 @@ class MysqlModel
       end
     end
 
+    def where(options)
+      options = options.select { |_, v| v.present? }
+      if options.present?
+        condition = options.to_a.map { |x| "#{x[0]} = '#{x[1]}'" }.join(' and ')
+        client.query("select * from #{table_name} where #{condition} ;").map do |attributes|
+          new(attributes)
+        end
+      else
+        all
+      end
+    end
+
     def find(row_id)
-      select_sql = "select * from  #{table_name} where id = #{row_id}"
+      select_sql = "select * from  #{table_name} where id = #{row_id};"
       attributes = client.query(select_sql).first
       return nil unless attributes
       new(attributes)
@@ -54,22 +63,19 @@ class MysqlModel
     client.query(insert_sql(available_attrs, values))
   end
 
-
   def destroy
     client.query(delete_sql)
   end
 
-
   private
 
   def insert_sql(fields, values)
-    "insert into #{table_name} (#{fields.join(', ')}) values (#{values.join(', ')})"
+    "insert into #{table_name} (#{fields.join(', ')}) values (#{values.join(', ')});"
   end
 
   def delete_sql
-    "delete from #{table_name} where id = #{id}"
+    "delete from #{table_name} where id = #{id};"
   end
-
 
   def define_from_class
     [:available_attrs, :client, :table_name].each do |method_name|
@@ -78,5 +84,4 @@ class MysqlModel
       end
     end
   end
-
 end
