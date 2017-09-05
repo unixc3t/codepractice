@@ -58,16 +58,49 @@ class MysqlModel
 
   def save
     values = available_attrs.map do |attr_name|
-      "'#{send(attr_name)}'"
+      "#{send(attr_name)}"
     end
-    client.query(insert_sql(available_attrs, values))
+
+    if created?
+      p update_sql(available_attrs, values)
+      client.query(update_sql(available_attrs, values))
+    else
+      client.query(insert_sql(available_attrs, values))
+    end
+  end
+
+  def update(attributes)
+    assigne_attributes(attributes)
+    save
   end
 
   def destroy
     client.query(delete_sql)
   end
 
+  def created?
+    id.present?
+  end
+
+
+
   private
+
+  def update_sql(fields, values)
+    attributes = {}.tap do |x|
+      fields.each_with_index do |val, index|
+        x[val] = values[index]
+      end
+    end
+    attr_sql = attributes.map { |k, v| "#{k}='#{v}'" }.join(',')
+    "update #{table_name} set #{attr_sql}  where id = #{id};"
+  end
+
+  def assigne_attributes(attributes)
+    attributes.each do |attr_name, attr_value|
+      send("#{attr_name}=", attr_value)
+    end
+  end
 
   def insert_sql(fields, values)
     "insert into #{table_name} (#{fields.join(', ')}) values (#{values.join(', ')});"

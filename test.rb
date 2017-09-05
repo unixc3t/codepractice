@@ -1,4 +1,12 @@
 require 'active_support/all'
-a = { nick: 'dfd', ip: '123' }.select{|k,v| v.present?}.to_a.map {|x| "#{x[0]} = '#{x[1]}'"}
-p a
-p a.join(" and ")
+
+fields=[:name, :age]
+values=['jack', 12]
+
+z = Hash.new.tap do |x|
+  fields.each_with_index do |val, index|
+    x[val] = values[index-1]
+  end
+end
+
+p z

@@ -42,12 +42,17 @@
     <tbody>
     <% @guest_books.each do |guest| %>
         <tr>
-          <td><%= guest.nick %>(<%= guest.email %>)</td>
+          <td>
+            <a href="/guests/<%= guest.id%>"><%= guest.nick %></a>
+            (<%= guest.email %>)</td>
           <td><%= guest.text %></td>
           <td><%= guest.created_human_at %></td>
           <td><%= guest.ip %></td>
           <td>
-            <a class="btn btn-warning" href="/guests/<%= guest.id %>/delete">Delete</a>
+            <form action="/guests/<%=guest.id %>/delete" method="post">
+              <input type="hidden" name="_method" value="delete">
+              <input class="btn btn-warning" type="submit" value="Delete">
+            </form>
           </td>
         </tr>
     <% end %>

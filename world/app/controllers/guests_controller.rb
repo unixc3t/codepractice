@@ -10,11 +10,27 @@ class GuestsController < ApplicationController
     redirect_to '/guests'
   end
 
-
   def destroy
     guestbook = GuestBook.find(params['id'])
     guestbook.destroy
     redirect_to '/guests'
+  end
+
+  def show
+    @guest = GuestBook.find(params['id'])
+    render
+  end
+
+  def update
+    @guest = GuestBook.find(params['id'])
+    @guest.update(create_params)
+
+    redirect_to "/guests/#{@guest.id}"
+  end
+
+  def edit
+    @guest = GuestBook.find(params['id'])
+    render
   end
 
   def api
@@ -24,8 +40,8 @@ class GuestsController < ApplicationController
   private
 
   def create_params
-    params.select { |k, _|
+    params.select do |k, _|
       GuestBook.include_attribute? k
-    }.merge('ip' => request.ip)
+    end.merge('ip' => request.ip)
   end
 end
