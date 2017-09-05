@@ -16,6 +16,11 @@ class GuestsController < ApplicationController
     redirect_to '/guests'
   end
 
+  def new
+    @guest = GuestBook.new
+    render(template_name: :edit)
+  end
+
   def show
     @guest = GuestBook.find(params['id'])
     render

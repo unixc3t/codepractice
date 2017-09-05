@@ -58,11 +58,10 @@ class MysqlModel
 
   def save
     values = available_attrs.map do |attr_name|
-      "#{send(attr_name)}"
+      "'#{send(attr_name)}'"
     end
 
     if created?
-      p update_sql(available_attrs, values)
       client.query(update_sql(available_attrs, values))
     else
       client.query(insert_sql(available_attrs, values))
@@ -92,7 +91,7 @@ class MysqlModel
         x[val] = values[index]
       end
     end
-    attr_sql = attributes.map { |k, v| "#{k}='#{v}'" }.join(',')
+    attr_sql = attributes.map { |k, v| "#{k}=#{v}" }.join(',')
     "update #{table_name} set #{attr_sql}  where id = #{id};"
   end
 

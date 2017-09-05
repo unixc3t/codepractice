@@ -4,6 +4,7 @@ require 'sinatra'
 
 Routing.route({
                 'guests#index' => { path: %w(/ /guests), methods: [:get] },
+                'guests#new' => { path: '/guests/new', methods: [:get] },
                 'guests#create' => { path: '/guests', methods: [:post] },
                 'guests#update' => { path: '/guests/:id/update', methods: [:post] },
                 'guests#destroy' => { path: '/guests/:id/delete', methods: :post },
