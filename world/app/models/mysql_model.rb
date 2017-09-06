@@ -32,6 +32,12 @@ class MysqlModel
       end
     end
 
+    def find_by(options)
+      options = options.select { |_, v| v.present? }
+      return nil unless options.present?
+      where(options).first
+    end
+
     def find(row_id)
       select_sql = "select * from  #{table_name} where id = #{row_id};"
       attributes = client.query(select_sql).first

@@ -1,9 +1,6 @@
 require 'active_support/all'
 
-def zz(template_name: nil, action: nil, controller: nil)
-  p template_name
-end
+a = {name: 'jack'}
+current_user ||= a[:name].try { |p| "Hello, #{p}" }
 
-
-zz :edit
-
+p current_user

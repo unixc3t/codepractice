@@ -38,12 +38,13 @@ class Routing
     end
 
 
-    def run(handler_data, request, response, params)
+    def run(handler_data, request, response, params,session)
       handler_split_data = handler_data.split('#')
       class_prefix = handler_split_data[0].capitalize
       controller_class = Object.const_get("#{class_prefix}Controller")
       controller_class.new(request, response,
                            params,
+                           session,
                            handler_split_data[0],
                            handler_split_data[1]).send(handler_split_data[1])
     end
@@ -60,7 +61,7 @@ class Routing
     end
 
     def eval_string(method, path, handler_data)
-      "#{method}('#{path}') { Routing.run('#{handler_data}', request, response, params)}"
+      "#{method}('#{path}') { Routing.run('#{handler_data}', request, response, params,session)}"
     end
   end
 end
