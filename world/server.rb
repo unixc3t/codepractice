@@ -1,8 +1,10 @@
 require_relative './conf/init'
 require 'sinatra'
+require 'sinatra/reloader' if development?
+require 'sinatra/cookies'
 enable :sessions
-
-
+enable :reloader
+set :server, :puma
 Routing.route({
                 'guests#index' => { path: %w(/ /guests), methods: [:get] },
                 'guests#new' => { path: '/guests/new', methods: [:get] },
@@ -17,8 +19,9 @@ Routing.route({
                 'users#new' => { path: '/users/new', methods: [:get] },
                 'users#create' => { path: '/users', methods: [:post] },
                 'users#login' => { path: '/login', methods: [:get] },
-                'users#sign_in' => { path: '/users/sign_in', methods: [:post] },
+                'users#sign_in' => { path: '/sign_in', methods: [:post] },
                 'users#logout' => { path: '/logout', methods: [:get] }
+
               }, binding)
 
 

@@ -16,16 +16,26 @@ class UsersController < ApplicationController
 
   def sign_in
     @user = User.find_by(email: params[:email], password: params[:password])
-    p 'user'
-    p @user
-    p 'user'
-    session[:user_id] = @user.id if @user
+    if @user
+      session[:user_id] = @user.id
+      if params[:remember].present?
+        set_cookies('re_email', encode(params[:email]), Time.now + 1.week)
+        set_cookies('re_password', encode(params[:password]), Time.now + 1.week)
+      end
+    end
     redirect_to '/guests'
   end
 
   def logout
-    session[:user_id] = nil
-    redirect_to '/guests'
+
+    p 'tttttttt'
+    session.clear
+    set_cookies('re_email', '', Time.now)
+    set_cookies('re_password', '', Time.now)
+    redirect_to '/login'
+  rescue
+    puts "error"
+
   end
 
   private
