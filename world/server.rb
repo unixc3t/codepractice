@@ -20,7 +20,9 @@ Routing.route({
                 'users#create' => { path: '/users', methods: [:post] },
                 'users#login' => { path: '/login', methods: [:get] },
                 'users#sign_in' => { path: '/sign_in', methods: [:post] },
-                'users#logout' => { path: '/logout', methods: [:get] }
+                'users#logout' => { path: '/users/logout', methods: [:get] },
+                'users#profile' => { path: '/profile', methods: [:get] },
+                'users#update' => { path: '/users/update', methods: [:post] }
 
               }, binding)
 

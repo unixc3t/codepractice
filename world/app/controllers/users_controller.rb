@@ -27,8 +27,6 @@ class UsersController < ApplicationController
   end
 
   def logout
-
-    p 'tttttttt'
     session.clear
     set_cookies('re_email', '', Time.now)
     set_cookies('re_password', '', Time.now)
@@ -37,6 +35,23 @@ class UsersController < ApplicationController
     puts "error"
 
   end
+
+  def profile
+    render
+  end
+
+  def update
+    current_user.update(nick: params[:nick])
+    p params[:avatar]
+    if params[:avatar].present?
+      suffix = params[:avatar][:filename].split('.').last
+      path = params[:avatar][:tempfile].path
+
+      `cp #{path} #{User::AVATAR_PATH}/#{current_user.id}.#{suffix}`
+    end
+    redirect_to '/profile'
+  end
+
 
   private
   def create_params

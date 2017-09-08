@@ -1,0 +1,17 @@
+<form
+action="/users/update"
+enctype="multipart/form-data"
+method="post">
+  <div class="form-group">
+    <label for="nick">nick</label>
+    <input type="text" class="form-control" name="nick" value="<%= current_user.nick %>" placeholder="nick">
+  </div>
+  <div class="form-group">
+    <label for="avatar">avatar</label>
+    <input type="file" class="form-control" name="avatar" >
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-default">update</button>
+    <a href="/guests" class="btn btn-default">cancel</a>
+  </div>
+</form>

@@ -1,7 +1,5 @@
 class GuestsController < ApplicationController
   def index
-    puts cookies['re_email']
-    puts cookies['re_password']
     @guest_books = GuestBook.where(nick: params[:nick])
     render
   end
