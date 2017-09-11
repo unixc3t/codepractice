@@ -20,7 +20,6 @@ class ApplicationController
     @session = session
     @controller_name = controller_name
     @action_name = action_name
-    update_remember_me
   end
 
   protected
@@ -36,13 +35,13 @@ class ApplicationController
     set_cookies(:re_password, cookies[:re_password])
   end
 
-  def set_cookies(key, value, expires = Time.now + 1.week)
-    response.set_cookie(key, value: value, expires: expires, httponly: false)
+  def set_cookies(key, value, expires = Time.now + 10.seconds)
+    response.set_cookie(key, value: value, expires: expires)
   end
 
   def redirect_to(_path)
-    response['Location'] = '/'
     response.status = '302'
+    response['Location'] = '/guests'
   end
 
   def render(template_name: nil, action: nil, controller: nil)

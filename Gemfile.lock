@@ -8,14 +8,11 @@ GEM
       tzinfo (~> 1.1)
     backports (3.8.0)
     concurrent-ruby (1.0.5)
-    daemons (1.2.4)
-    eventmachine (1.2.5)
     i18n (0.8.6)
     minitest (5.10.3)
     multi_json (1.12.1)
     mustermann (1.0.0)
     mysql2 (0.4.9)
-    puma (3.10.0)
     rack (2.0.3)
     rack-protection (2.0.0)
       rack
@@ -32,10 +29,6 @@ GEM
       rack-protection (= 2.0.0)
       sinatra (= 2.0.0)
       tilt (>= 1.3, < 3)
-    thin (1.7.2)
-      daemons (~> 1.0, >= 1.0.9)
-      eventmachine (~> 1.0, >= 1.0.4)
-      rack (>= 1, < 3)
     thread_safe (0.3.6)
     tilt (2.0.8)
     tzinfo (1.2.3)
@@ -47,11 +40,9 @@ PLATFORMS
 DEPENDENCIES
   activesupport (~> 5.1)
   mysql2
-  puma
   require_all
   sinatra
   sinatra-contrib
-  thin
 
 BUNDLED WITH
    1.15.4

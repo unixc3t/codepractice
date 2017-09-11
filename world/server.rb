@@ -4,7 +4,6 @@ require 'sinatra/reloader' if development?
 require 'sinatra/cookies'
 enable :sessions
 enable :reloader
-set :server, :puma
 Routing.route({
                 'guests#index' => { path: %w(/ /guests), methods: [:get] },
                 'guests#new' => { path: '/guests/new', methods: [:get] },
